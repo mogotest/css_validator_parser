@@ -14,24 +14,26 @@ describe "CSS Validator Parser" do
     end
 
     it "should return validation errors" do
-      @parser.errors.should_not be_empty
+      @parser.errors.size.should == 1 # There should only be one URI.
+      @parser.errors[@uri].size.should == 24 # That URI should have 24 errors.
 
       error = @parser.errors[@uri].first
-      error[:line].should_not be_empty
-      error[:type].should_not be_empty
-      error[:context].should_not be_empty
-      error[:subtype].should_not be_empty
-      error[:skipped_string].should_not be_empty
-      error[:message].should_not be_empty
+      error[:line].should == '36'
+      error[:type].should == 'parse-error'
+      error[:context].should == '#customer_left.customized, #customer_right.customized'
+      error[:subtype].should == 'exp'
+      error[:skipped_string].should == '5px'
+      error[:message].should == "Property -moz-border-radius doesn't exist :"
     end
 
     it "should return validation warnings" do
-      @parser.warnings.should_not be_empty
+      @parser.warnings.size.should == 1 # There should only be one URI.
+      @parser.warnings[@uri].size.should == 4 # That URI should have 4 warnings.
 
       warning = @parser.warnings[@uri].first
-      warning[:line].should_not be_empty
-      warning[:level].should_not be_empty
-      warning[:message].should_not be_empty
+      warning[:line].should == '241'
+      warning[:level].should == '1'
+      warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr'
     end
   end
 
