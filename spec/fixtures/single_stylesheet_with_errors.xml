@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding="utf-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+    <env:Body>
+        <m:cssvalidationresponse
+            env:encodingStyle="http://www.w3.org/2003/05/soap-encoding"
+            xmlns:m="http://www.w3.org/2005/07/css-validator">
+            <m:uri>http://localhost:3000/</m:uri>
+            <m:checkedby>http://jigsaw.w3.org/css-validator/</m:checkedby>
+            <m:csslevel>css21</m:csslevel>
+            <m:date>2009-10-29T01:34:43Z</m:date>
+            <m:validity>false</m:validity>
+            <m:result>
+                <m:errors xml:lang="en">
+                    <m:errorcount>24</m:errorcount>
+
+                <m:errorlist>
+                    <m:uri>http://localhost:3000/stylesheets/master.css?1256692632</m:uri>
+
+                        <m:error>
+                            <m:line>36</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_left.customized, #customer_right.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>37</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_left.customized, #customer_right.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>38</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_left.customized, #customer_right.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>54</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_header.customized, #customer_footer.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>55</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_header.customized, #customer_footer.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>56</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> #customer_header.customized, #customer_footer.customized </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>68</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .wrapper </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>69</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .wrapper </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>70</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .wrapper </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>136</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> div.flash </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>137</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> div.flash </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>138</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> div.flash </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>157</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .errorExplanation </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>158</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .errorExplanation </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>159</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .errorExplanation </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                4px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>196</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo ul.actions li img.disabled, .user_info ul.actions li img.disabled </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                0.2
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property opacity doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>197</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo ul.actions li img.disabled, .user_info ul.actions li img.disabled </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                0.2
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-opacity doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>198</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo ul.actions li img.disabled, .user_info ul.actions li img.disabled </m:context>
+                            <m:message>
+
+                                attempt to find a semi-colon before the property name. add it
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>198</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo ul.actions li img.disabled, .user_info ul.actions li img.disabled </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                DXImageTransform
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property progid doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>198</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo ul.actions li img.disabled, .user_info ul.actions li img.disabled </m:context>
+                            <m:errorsubtype>
+                                unrecognized
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                DXImageTransform.Microsoft.Alpha(Opacity=20);
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Parse Error
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>200</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .user_info ul.actions li a </m:context>
+                            <m:errorsubtype>
+                                unrecognized
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                [: alpha(opacity=20); }
+    .photo ul.actions li a]
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Parse Error
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>261</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo .comments .comment, .user_info .comments .comment </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -moz-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>262</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo .comments .comment, .user_info .comments .comment </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property -webkit-border-radius doesn&#39;t exist :
+                            </m:message>
+                        </m:error>
+
+                        <m:error>
+                            <m:line>263</m:line>
+                            <m:errortype>parse-error</m:errortype>
+                            <m:context> .photo .comments .comment, .user_info .comments .comment </m:context>
+                            <m:errorsubtype>
+                                exp
+                            </m:errorsubtype>
+                            <m:skippedstring>
+                                5px
+                            </m:skippedstring>
+
+                            <m:message>
+
+                                Property border-radius doesn&#39;t exist in CSS level 2.1 but exists in  :
+                            </m:message>
+                        </m:error>
+
+                    </m:errorlist>
+
+                </m:errors>
+                <m:warnings xml:lang="en">
+                    <m:warningcount>4</m:warningcount>
+
+                    <m:warninglist>
+                        <m:uri>http://localhost:3000/stylesheets/master.css?1256692632</m:uri>
+
+                        <m:warning>
+                            <m:line>241</m:line>
+                            <m:level>1</m:level>
+                            <m:message>Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr</m:message>
+                        </m:warning>
+
+                        <m:warning>
+                            <m:line>241</m:line>
+                            <m:level>1</m:level>
+                            <m:message>Same colors for color and background-color in two contexts .photo .comments .comment and .user_info hr</m:message>
+                        </m:warning>
+
+                        <m:warning>
+                            <m:line>241</m:line>
+                            <m:level>1</m:level>
+                            <m:message>Same colors for color and background-color in two contexts .photo .comments .comment and .photo hr</m:message>
+                        </m:warning>
+
+                        <m:warning>
+                            <m:line>241</m:line>
+                            <m:level>1</m:level>
+                            <m:message>Same colors for color and background-color in two contexts .user_info .comments .comment and .user_info hr</m:message>
+                        </m:warning>
+
+                    </m:warninglist>
+                    </m:warnings>
+            </m:result>
+        </m:cssvalidationresponse>
+    </env:Body>
+</env:Envelope>
+
