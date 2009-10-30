@@ -75,6 +75,27 @@ describe "CSS Validator Parser" do
     end
   end
 
+  describe "embedded styles results" do
+    before(:each) do
+      @parser.parse(embedded_styles_with_warnings)
+      @uri = "http://zerosum.org/"
+    end
+
+    it "should have no validation errors" do
+      @parser.errors.size.should == 0
+    end
+
+    it "should return validation warnings" do
+      @parser.warnings.size.should == 1 # There should only be one URI.
+      @parser.warnings[@uri].size.should == 9 # That URI should have 4 warnings.
+
+      warning = @parser.warnings[@uri].first
+      warning[:line].should == '31'
+      warning[:level].should == '1'
+      warning[:message].should == 'Same colors for color and background-color in two contexts a:hover and .axiom'
+    end
+  end
+
   private
 
   def single_stylesheet_results
@@ -83,6 +104,10 @@ describe "CSS Validator Parser" do
 
   def multiple_stylesheet_results
     File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/multiple_stylesheets_with_errors.xml')).read
+  end
+
+  def embedded_styles_with_warnings
+    File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/embedded_styles_with_warnings.xml')).read
   end
 
 end
