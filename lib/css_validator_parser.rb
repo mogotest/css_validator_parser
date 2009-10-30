@@ -37,8 +37,6 @@ class CssValidatorParser
     xml = REXML::Document.new(response)
     @valid = (/true/.match(xml.root.elements["env:Body/m:cssvalidationresponse/m:validity"].get_text.value))? true : false
 
-    #@warnings[uri] = []
-
     xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:errors/m:errorlist") do |error_list|
       uri = error_list.elements["m:uri"].get_text.value.strip
       @errors[uri] = []
@@ -55,26 +53,18 @@ class CssValidatorParser
       end
     end
 
-#    unless @valid
-#      xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:errors/m:errorlist/m:error") do |error|
-#        @errors[uri] << {
-#                :type => error.elements["m:errortype"].nil? ? "" : error.elements["m:errortype"].get_text.value.strip,
-#                :line => error.elements["m:line"].nil? ? "" : error.elements["m:line"].get_text.value.strip,
-#                :context => error.elements["m:context"].nil? ? "" : error.elements["m:context"].get_text.value.strip,
-#                :subtype => error.elements["m:errorsubtype"].nil? ? "" : error.elements["m:errorsubtype"].get_text.value.strip,
-#                :skipped_string => error.elements["m:skippedstring"].nil? ? "" : error.elements["m:skippedstring"].get_text.value.strip,
-#                :message => error.elements["m:message"].nil? ? "" : error.elements["m:message"].get_text.value.strip
-#        }
-#      end
-#    end
+    xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:warnings/m:warninglist") do |warning_list|
+      uri = warning_list.elements["m:uri"].get_text.value.strip
+      @warnings[uri] = []
 
-#    xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:warnings/m:warninglist/m:warning") do |warning|
-#      @warnings[uri] << {
-#              :level => warning.elements["m:level"].nil? ? "" : warning.elements["m:level"].get_text.value.strip,
-#              :line => warning.elements["m:line"].nil? ? "" : warning.elements["m:line"].get_text.value.strip,
-#              :message => warning.elements["m:message"].nil? ? "" : warning.elements["m:message"].get_text.value.strip
-#      }
-#    end
+      warning_list.elements.each("m:warning") do |warning|
+        @warnings[uri] << {
+                :level => warning.elements["m:level"].nil? ? "" : warning.elements["m:level"].get_text.value.strip,
+                :line => warning.elements["m:line"].nil? ? "" : warning.elements["m:line"].get_text.value.strip,
+                :message => warning.elements["m:message"].nil? ? "" : warning.elements["m:message"].get_text.value.strip
+        }
+      end
+    end
   end
 
   def clear

@@ -66,12 +66,12 @@ describe "CSS Validator Parser" do
 
     it "should return validation warnings" do
       @parser.warnings.size.should == 1 # There should only be one URI.
-      @parser.warnings[@uri].size.should == 4 # That URI should have 4 warnings.
+      @parser.warnings[@uris.first].size.should == 4
 
-      warning = @parser.warnings[@uri].first
-      warning[:line].should == '241'
+      warning = @parser.warnings[@uris.first].first
+      warning[:line].should == '236'
       warning[:level].should == '1'
-      warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr'
+      warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .user_info hr'
     end
   end
 
