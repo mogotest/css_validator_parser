@@ -12,11 +12,14 @@ describe "CSS Validator Parser" do
       @uri = "http://localhost:3000/stylesheets/master.css?1256692632"
     end
 
-    it "should return validation errors" do
-      @parser.errors.size.should == 1 # There should only be one URI.
-      @parser.errors[@uri].size.should == 24 # That URI should have 24 errors.
+    it "should only only contain one URI" do
+      @parser.keys.size.should == 1
+    end
 
-      error = @parser.errors[@uri].first
+    it "should return validation errors" do
+      @parser[@uri][:errors].size.should == 24 # That URI should have 24 errors.
+
+      error = @parser[@uri][:errors].first
       error[:line].should == '36'
       error[:type].should == 'parse-error'
       error[:context].should == '#customer_left.customized, #customer_right.customized'
@@ -26,10 +29,9 @@ describe "CSS Validator Parser" do
     end
 
     it "should return validation warnings" do
-      @parser.warnings.size.should == 1 # There should only be one URI.
-      @parser.warnings[@uri].size.should == 4 # That URI should have 4 warnings.
+      @parser[@uri][:warnings].size.should == 4
 
-      warning = @parser.warnings[@uri].first
+      warning = @parser[@uri][:warnings].first
       warning[:line].should == '241'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr'
@@ -42,12 +44,15 @@ describe "CSS Validator Parser" do
       @uris = ["http://staging.snap2twitter.com/stylesheets/master.css?1256667744", "http://staging.snap2twitter.com/stylesheets/facebox.css?1256667744"]
     end
 
-    it "should return validation errors" do
-      @parser.errors.size.should == 2 # There should only be two URIs.
-      @parser.errors[@uris.first].size.should == 24
-      @parser.errors[@uris.last].size.should == 1
+    it "should only contain two URIs" do
+      @parser.keys.size.should == 2
+    end
 
-      error = @parser.errors[@uris.first].first
+    it "should return validation errors" do
+      @parser[@uris.first][:errors].size.should == 24
+      @parser[@uris.last][:errors].size.should == 1
+
+      error = @parser[@uris.first][:errors].first
       error[:line].should == '36'
       error[:type].should == 'parse-error'
       error[:context].should == '#customer_left.customized, #customer_right.customized'
@@ -55,7 +60,7 @@ describe "CSS Validator Parser" do
       error[:skipped_string].should == '5px'
       error[:message].should == "Property -moz-border-radius doesn't exist :"
 
-      error = @parser.errors[@uris.last].first
+      error = @parser[@uris.last][:errors].first
       error[:line].should == '60'
       error[:type].should == 'parse-error'
       error[:context].should == '* html #facebox_overlay'
@@ -65,10 +70,10 @@ describe "CSS Validator Parser" do
     end
 
     it "should return validation warnings" do
-      @parser.warnings.size.should == 1 # There should only be one URI.
-      @parser.warnings[@uris.first].size.should == 4
+      @parser[@uris.first][:warnings].size.should == 4
+      @parser[@uris.last][:warnings].size.should == 0
 
-      warning = @parser.warnings[@uris.first].first
+      warning = @parser[@uris.first][:warnings].first
       warning[:line].should == '236'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .user_info hr'
@@ -81,15 +86,18 @@ describe "CSS Validator Parser" do
       @uri = "http://zerosum.org/"
     end
 
+    it "should only contain one URI" do
+      @parser.keys.size.should == 1
+    end
+
     it "should have no validation errors" do
-      @parser.errors.size.should == 0
+      @parser[@uri][:errors].size.should == 0
     end
 
     it "should return validation warnings" do
-      @parser.warnings.size.should == 1 # There should only be one URI.
-      @parser.warnings[@uri].size.should == 9 # That URI should have 4 warnings.
+      @parser[@uri][:warnings].size.should == 9 # That URI should have 4 warnings.
 
-      warning = @parser.warnings[@uri].first
+      warning = @parser[@uri][:warnings].first
       warning[:line].should == '31'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts a:hover and .axiom'

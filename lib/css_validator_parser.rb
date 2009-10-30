@@ -27,8 +27,6 @@ require 'rexml/document'
 
 class CssValidatorParser
 
-  attr_reader :errors, :warnings, :valid
-
   def initialize
     clear
   end
@@ -39,10 +37,10 @@ class CssValidatorParser
 
     xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:errors/m:errorlist") do |error_list|
       uri = error_list.elements["m:uri"].get_text.value.strip
-      @errors[uri] = []
+      init_uri(uri)
 
       error_list.elements.each("m:error") do |error|
-        @errors[uri] << {
+        @results[uri][:errors] << {
                 :type => error.elements["m:errortype"].nil? ? "" : error.elements["m:errortype"].get_text.value.strip,
                 :line => error.elements["m:line"].nil? ? "" : error.elements["m:line"].get_text.value.strip,
                 :context => error.elements["m:context"].nil? ? "" : error.elements["m:context"].get_text.value.strip,
@@ -55,10 +53,10 @@ class CssValidatorParser
 
     xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:warnings/m:warninglist") do |warning_list|
       uri = warning_list.elements["m:uri"].get_text.value.strip
-      @warnings[uri] = []
+      init_uri(uri)
 
       warning_list.elements.each("m:warning") do |warning|
-        @warnings[uri] << {
+        @results[uri][:warnings] << {
                 :level => warning.elements["m:level"].nil? ? "" : warning.elements["m:level"].get_text.value.strip,
                 :line => warning.elements["m:line"].nil? ? "" : warning.elements["m:line"].get_text.value.strip,
                 :message => warning.elements["m:message"].nil? ? "" : warning.elements["m:message"].get_text.value.strip
@@ -68,10 +66,23 @@ class CssValidatorParser
   end
 
   def clear
-    @response = nil
-    @valid = false
-    @errors = {}
-    @warnings = {}
+    @results = {}
+  end
+
+  def keys
+    @results.keys
+  end
+
+  def [](uri)
+    @results[uri]
+  end
+
+  private
+
+  def init_uri(uri)
+    @results[uri] ||= {}
+    @results[uri][:errors] ||= []
+    @results[uri][:warnings] ||= []
   end
 
 end
