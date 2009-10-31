@@ -2,7 +2,7 @@
 # This code was heavily influenced by Edgar Gonzalez's work on another W3C
 # SOAP parsing project.  His software is licensed as follows:
 
-# Copyright (c) 2006 Edgar Gonzalez <edgar@lacaraoscura.com>
+# Portions copyright (c) 2006 Edgar Gonzalez <edgar@lacaraoscura.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
