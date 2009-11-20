@@ -7,7 +7,7 @@ begin
     gem.name = "css_validator_parser"
     gem.summary = "Parses SOAP results from the W3C CSS validator."
     gem.email = "nirvdrum@gmail.com"
-    gem.homepage = "http://github.com/kmenard/css_validator_parser"
+    gem.homepage = "http://codaset.com/nirvdrum/css_validation_parser"
     gem.authors = ["Kevin Menard"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
