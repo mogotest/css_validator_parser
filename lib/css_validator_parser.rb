@@ -23,7 +23,8 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-require 'rexml/document'
+require 'rubygems'
+require 'nokogiri'
 
 class CssValidatorParser
 
@@ -32,35 +33,40 @@ class CssValidatorParser
   end
 
   def parse(response)
-    xml = REXML::Document.new(response)
-    @valid = (/true/.match(xml.root.elements["env:Body/m:cssvalidationresponse/m:validity"].get_text.value))? true : false
+    xml = Nokogiri::XML(response)
+    xml.remove_namespaces!
 
-    xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:errors/m:errorlist") do |error_list|
-      uri = error_list.elements["m:uri"].get_text.value.strip
+    xml.xpath("//Envelope/Body/cssvalidationresponse/result/errors/errorlist").each do |error_list|
+      uri = error_list.at_xpath(".//uri").content.strip
       init_uri(uri)
 
-      error_list.elements.each("m:error") do |error|
-        @results[uri][:errors] << {
-                :type => error.elements["m:errortype"].nil? ? "" : error.elements["m:errortype"].get_text.value.strip,
-                :line => error.elements["m:line"].nil? ? "" : error.elements["m:line"].get_text.value.strip,
-                :context => error.elements["m:context"].nil? ? "" : error.elements["m:context"].get_text.value.strip,
-                :subtype => error.elements["m:errorsubtype"].nil? ? "" : error.elements["m:errorsubtype"].get_text.value.strip,
-                :skipped_string => error.elements["m:skippedstring"].nil? ? "" : error.elements["m:skippedstring"].get_text.value.strip,
-                :message => error.elements["m:message"].nil? ? "" : error.elements["m:message"].get_text.value.strip
-        }
+      error_list.xpath('.//error').each do |error|
+        error_hash = {}
+        error.children.each do |error_component|
+          next if error_component.name == 'text'
+
+          error_hash[translate_name(error_component.name)] = error_component.content.strip
+        end
+
+        # Store errors for URI under :errors key.
+        @results[uri][:errors] << error_hash
       end
     end
 
-    xml.elements.each("env:Envelope/env:Body/m:cssvalidationresponse/m:result/m:warnings/m:warninglist") do |warning_list|
-      uri = warning_list.elements["m:uri"].get_text.value.strip
+    xml.xpath("//Envelope/Body/cssvalidationresponse/result/warnings/warninglist").each do |warning_list|
+      uri = warning_list.at_xpath(".//uri").content.strip
       init_uri(uri)
 
-      warning_list.elements.each("m:warning") do |warning|
-        @results[uri][:warnings] << {
-                :level => warning.elements["m:level"].nil? ? "" : warning.elements["m:level"].get_text.value.strip,
-                :line => warning.elements["m:line"].nil? ? "" : warning.elements["m:line"].get_text.value.strip,
-                :message => warning.elements["m:message"].nil? ? "" : warning.elements["m:message"].get_text.value.strip
-        }
+      warning_list.xpath('.//warning').each do |warning|
+        warning_hash = {}
+        warning.children.each do |warning_component|
+          next if warning_component.name == 'text'
+
+          warning_hash[translate_name(warning_component.name)] = warning_component.content.strip
+        end
+
+        # Store warnings for URI under :warnings key.
+        @results[uri][:warnings] << warning_hash
       end
     end
   end
@@ -83,6 +89,15 @@ class CssValidatorParser
     @results[uri] ||= {}
     @results[uri][:errors] ||= []
     @results[uri][:warnings] ||= []
+  end
+
+  def translate_name(name)
+    case name
+      when 'errortype' then :type
+      when 'errorsubtype' then :subtype
+      when 'skippedstring' then :skipped_string
+      else name.to_sym
+    end
   end
 
 end
