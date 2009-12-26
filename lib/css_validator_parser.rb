@@ -50,6 +50,11 @@ class CssValidatorParser
 
         # Store errors for URI under :errors key.
         @results[uri][:errors] << error_hash
+
+        # Store errors for URI by line number.
+        error_line = error_hash[:line].to_i
+        init_error_for_line(uri, error_line)
+        @results[uri][error_line][:errors] << error_hash
       end
     end
 
@@ -67,6 +72,11 @@ class CssValidatorParser
 
         # Store warnings for URI under :warnings key.
         @results[uri][:warnings] << warning_hash
+
+        # Store warnings for URI by line number.
+        warning_line = warning_hash[:line].to_i
+        init_warning_for_line(uri, warning_line)
+        @results[uri][warning_line][:warnings] << warning_hash
       end
     end
   end
@@ -89,6 +99,16 @@ class CssValidatorParser
     @results[uri] ||= {}
     @results[uri][:errors] ||= []
     @results[uri][:warnings] ||= []
+  end
+
+  def init_error_for_line(uri, line)
+    @results[uri][line] ||= {}
+    @results[uri][line][:errors] ||= []
+  end
+
+  def init_warning_for_line(uri, line)
+    @results[uri][line] ||= {}
+    @results[uri][line][:warnings] ||= []
   end
 
   def translate_name(name)

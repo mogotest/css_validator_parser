@@ -28,10 +28,31 @@ describe "CSS Validator Parser" do
       error[:message].should == "Property -moz-border-radius doesn't exist :"
     end
 
+    it 'should return validation errors by line number' do
+      @parser[@uri][36][:errors].size.should == 1 # There should be one error for line 36.
+
+      error = @parser[@uri][36][:errors].first
+      error[:line].should == '36'
+      error[:type].should == 'parse-error'
+      error[:context].should == '#customer_left.customized, #customer_right.customized'
+      error[:subtype].should == 'exp'
+      error[:skipped_string].should == '5px'
+      error[:message].should == "Property -moz-border-radius doesn't exist :"
+    end
+
     it "should return validation warnings" do
       @parser[@uri][:warnings].size.should == 4
 
       warning = @parser[@uri][:warnings].first
+      warning[:line].should == '241'
+      warning[:level].should == '1'
+      warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr'
+    end
+
+    it 'should return validation warnings by line number' do
+      @parser[@uri][241][:warnings].size.should == 4 # There should be four warnings for line 241.
+
+      warning = @parser[@uri][241][:warnings].first
       warning[:line].should == '241'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .photo hr'
@@ -69,11 +90,42 @@ describe "CSS Validator Parser" do
       error[:message].should =~ /Value Error :  height \(http:\/\/www.w3.org\/TR\/CSS21\/visudet.html#propdef-height\)\s*Parse Error/
     end
 
+    it 'should return validation errors by line number' do
+      @parser[@uris.first][36][:errors].size.should == 1 # There should be one error for line 36 in the first URI.
+      @parser[@uris.last][60][:errors].size.should == 1 # There should be one error for line 60 in the last URI.
+
+      error = @parser[@uris.first][36][:errors].first
+      error[:line].should == '36'
+      error[:type].should == 'parse-error'
+      error[:context].should == '#customer_left.customized, #customer_right.customized'
+      error[:subtype].should == 'exp'
+      error[:skipped_string].should == '5px'
+      error[:message].should == "Property -moz-border-radius doesn't exist :"
+
+      error = @parser[@uris.last][60][:errors].first
+      error[:line].should == '60'
+      error[:type].should == 'parse-error'
+      error[:context].should == '* html #facebox_overlay'
+      error[:subtype].should == 'unrecognized'
+      error[:skipped_string].should == "document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px')"
+      error[:message].should =~ /Value Error :  height \(http:\/\/www.w3.org\/TR\/CSS21\/visudet.html#propdef-height\)\s*Parse Error/
+    end
+
     it "should return validation warnings" do
       @parser[@uris.first][:warnings].size.should == 4
       @parser[@uris.last][:warnings].size.should == 0
 
       warning = @parser[@uris.first][:warnings].first
+      warning[:line].should == '236'
+      warning[:level].should == '1'
+      warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .user_info hr'
+    end
+
+    it 'should return validation warnings by line number' do
+      @parser[@uris.first][236][:warnings].size.should == 4 # There should be four warnings for line 236 in the first URI.
+
+      warning = @parser[@uris.first
+      ][236][:warnings].first
       warning[:line].should == '236'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts .user_info .comments .comment and .user_info hr'
@@ -95,9 +147,18 @@ describe "CSS Validator Parser" do
     end
 
     it "should return validation warnings" do
-      @parser[@uri][:warnings].size.should == 9 # That URI should have 4 warnings.
+      @parser[@uri][:warnings].size.should == 9 # That URI should have nine warnings.
 
       warning = @parser[@uri][:warnings].first
+      warning[:line].should == '31'
+      warning[:level].should == '1'
+      warning[:message].should == 'Same colors for color and background-color in two contexts a:hover and .axiom'
+    end
+
+    it 'should return validation warnings by line number' do
+      @parser[@uri][31][:warnings].size.should == 1 # There should be one warning for line 31.
+
+      warning = @parser[@uri][31][:warnings].first
       warning[:line].should == '31'
       warning[:level].should == '1'
       warning[:message].should == 'Same colors for color and background-color in two contexts a:hover and .axiom'
